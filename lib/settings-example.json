@@ -1,0 +1,19 @@
+{
+  "language": {
+    "default": "ruby",
+    
+    "ruby": {
+      "ext": "rb",
+      "testing": {
+        "default": "rspec",
+        "options": ["minitest", "rspec"]
+      },
+      "templates": {
+        "test": {
+          "name"    : "<%= class_name %>_spec.rb",
+          "location": "rspec_template.erb"
+        }
+      }
+    },
+
+}
