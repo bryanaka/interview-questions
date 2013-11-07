@@ -1,5 +1,5 @@
 require 'rspec'
-requrie './<%= file_name %>'
+require File.expand_path './<%= file_name %>', __FILE__
 
 describe <%= class_name %> do
   it 'Works! Now start writing some real tests' do

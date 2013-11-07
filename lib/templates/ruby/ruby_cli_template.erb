@@ -1,0 +1,41 @@
+#!/usr/bin/ruby
+require File.expand_path './<%= file_name %>', __FILE__
+
+require 'optparse'
+
+class Cli
+	attr_accessor :options
+
+	def initialize
+		@options = parse_options
+	end
+
+	def run
+		File.open(options[:file]).each_line do |line|
+			puts "do something with #{line}"
+		end
+	end
+
+	def parse_options
+		defaults = {
+			:file => ARGV[0],
+			:line => nil
+		}
+		opts = {}
+		OptionParser.new do |opt|
+			opt.on("-f", "--file [FILE]", String, "File Name") do |f|
+				opts[:file] = f
+			end
+		
+			opt.on( "-l", "--line [LINE]", Integer, "Line Number") do |l|
+				opts[:line] = l
+			end
+		end.parse!
+		defaults.merge opts
+	end
+
+end
+
+cli = <%= class_name %>Cli.new
+
+cli.run
