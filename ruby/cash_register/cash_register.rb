@@ -1,5 +1,5 @@
 class CashRegister
-	@@cash_name = {
+	@@cash_names = {
 		0.01   => 'PENNY',
     0.05   => 'NICKEL',
     0.10   => 'DIME',
@@ -29,15 +29,25 @@ class CashRegister
 		100.00
 	]
 
-	def monetize(money)
-		money = Float(money)
-		return @cash if money <= 0.0
-		@cash ||= []
+	def monetize(money, cash=Array.new)
+		while money >= 100.00
+			cash.push 100.0
+			money -= 100.0
+		end
+		return cash if money <= 0.0
 		denomination = @@cash_values.bsearch {|x| x >= money }
 		index = @@cash_values.index(denomination)
-		index = (index == 0 ? index : index - 1 )
+		index = (index == 0 ? index : index - 1 ) unless money == denomination
 		denomination = @@cash_values[index]
-		@cash.push denomination
-		monetize(money - denomination)
+		cash.push(denomination)
+		monetize( (money - denomination).round(2), cash )
+	end
+
+	def give_change(cost, money_given)
+		return "ERROR" if cost > money_given
+		return "ZERO" if cost == money_given
+		money = Float(money_given - cost)
+		denominations = monetize(money)
+		denominations.map { |m| @@cash_names[m] }.join ","
 	end
 end
