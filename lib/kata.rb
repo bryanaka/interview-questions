@@ -9,19 +9,7 @@
 #
 require 'optparse'
 
-def underscore(term)
-	term.gsub!(/([A-Z\d]+)([A-Z][a-z])/,'\1_\2')
-  term.gsub!(/([a-z\d])([A-Z])/,'\1_\2')
-  term.tr!("-", "_")
-  term.downcase!
-  term
-end
-
-def camelize(term, uppercase_first_letter = true)
- 	term
-end
-
-class KataTool
+class Kata
 	attr_accessor :options
 	attr_reader   :command
 
