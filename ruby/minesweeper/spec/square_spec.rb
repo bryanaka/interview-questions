@@ -39,6 +39,12 @@ describe Square do
 	end
 
 	describe '#unflag' do
+		it 'can be unflagged' do
+			square.flag!
+			expect(square.flagged?).to be_true
+			square.unflag!
+			expect(square.flagged?).to be_false
+		end
 	end
 	
 	describe '#to_s' do
@@ -64,7 +70,8 @@ describe Square do
 		end
 
 		it 'is flagged' do
-
+			square.flag!
+			expect(square.to_s).to eq("⚐")
 		end
 	end
 
