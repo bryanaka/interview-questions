@@ -14,20 +14,58 @@ describe Square do
 			expect(square.mark!).to eq(0)
 		end
 
-		it 'can only happen once' do
+		it 'raises if marked twice' do
 			square.mark!
-			expect(square.mark!).to raise_exception
+			expect { square.mark!}.to raise_error
 		end
+	end
+
+	describe '#flag!' do
+		it 'can be flagged if not marked' do
+			square.flag!
+			expect(square.flagged?).to eq(true)
+		end
+
+		it 'cannot be flagged twice' do
+			square.flag!
+			expect { square.flag! }.to raise_error
+		end	
+		
+		xit 'cannot be flagged if marked' do
+
+		end
+
+	end
+
+	describe '#unflag' do
 	end
 	
-	describe '#to_s changes when marked' do
-		xit 'and is empty' do
+	describe '#to_s' do
+		it 'isnt marked yet' do
+			expect(square.to_s).to eq("□")
+		end
+		
+		it 'is marked and is empty' do
+			square.mark!
+			expect(square.to_s).to eq(" ")
 		end
 
-		xit 'and has has a number' do
+		it 'is marked and has has a number' do
+			number_square = Square.new(2,2,2)
+			number_square.mark!
+			expect(number_square.to_s).to eq("2")
+		end
+
+		it 'is marked and has a mine' do
+			mine_square = Square.new(2,2,-1)
+			mine_square.mark!
+			expect(mine_square.to_s).to eq("X")
+		end
+
+		it 'is flagged' do
+
 		end
 	end
 
-	xit 'can be flagged' do
-	end
+	
 end
