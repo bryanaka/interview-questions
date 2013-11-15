@@ -1,6 +1,6 @@
 class Square
 	attr_accessor :x, :y, :contents
-	attr_reader :marked, :flag
+	attr_reader :marked, :flagged
 
 	class IllegalMove < Exception
 	end
@@ -11,7 +11,7 @@ class Square
 	end
 
 	def mark
-		raise Exception, "This square is already marked" if marked?
+		raise Exception, "This square is already been marked" if marked?
 		@marked = true
 		@contents
 	end
@@ -19,25 +19,25 @@ class Square
 	def flag
 		raise Square::IllegalMove, "This square is marked, why are you trying to flag it?" if marked?
 		raise Square::IllegalMove, "This square is already flagged" if flagged?
-		@flag = true
+		@flagged = true
 		self
 	end
 
 	def unflag
-		@flag = false if @flag == true
+		@flagged = false if @flagged == true
 		self
 	end
 	
+	alias_method :mark!, :mark
 	alias_method :flag!, :flag
 	alias_method :unflag!, :unflag
-	alias_method :mark!, :mark
 
 	def marked?
 		@marked
 	end
 	
 	def flagged?
-		@flag
+		@flagged
 	end
 
 	def is_mine?
