@@ -1,20 +1,19 @@
-require "rspec"
-require File.expand_path "../../lib/singly_linked_list", __FILE__
+require File.expand_path "../../../spec_helper", __FILE__
 
-describe LinkedList do
-	let(:list) { LinkedList.new(10) }
+describe DataStructure::LinkedList do
+	let(:list) { DataStructure::LinkedList.new(10) }
 
 	it "uses Node class as the default Node type" do
-		expect(list.head).to be_instance_of(Node)
+		expect(list.head).to be_instance_of(DataStructure::Node)
 	end
 
 	it "points to nil on initialization if no node given" do
-		expect(LinkedList.new.head).to be_nil
+		expect(DataStructure::LinkedList.new.head).to be_nil
 	end
 
 	it "#length give length of the list" do
 		expect(list.length).to eq(1)
-		expect(LinkedList.new.length).to eq(0)
+		expect(DataStructure::LinkedList.new.length).to eq(0)
 	end
 
 	describe "#head" do
@@ -34,12 +33,13 @@ describe LinkedList do
 		it "can accept negative indexes in the same way Array does" do
 			list.insert(50)
 			list.insert(30)
-			expect(list[-1].data).to eq(50)
-			expect(list[-2].data).to eq(30)
+			expect(list[-1].data).to eq(10)
+			expect(list[-2].data).to eq(50)
+			expect(list[-3].data).to eq(30)
 		end
 		
 		it "returns nil if there is no head" do
-			expect(LinkedList.new[0]).to be_nil
+			expect(DataStructure::LinkedList.new[0]).to be_nil
 		end
 		
 		it "returns nil if trying to access a node that doesn't exist" do
@@ -70,7 +70,7 @@ describe LinkedList do
 
 	describe "#remove" do
 		let (:list5) do
-			list5 = LinkedList.new(1)
+			list5 = DataStructure::LinkedList.new(1)
 			list5.insert(2)
 			list5.insert(3)
 			list5.insert(4)
